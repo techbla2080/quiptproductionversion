@@ -1,5 +1,7 @@
 #import Modules
 import os
+
+from click import Choice
 import pyrebase
 import streamlit as st
 import numpy as np
@@ -33,8 +35,6 @@ choice = st.sidebar.selectbox('login/Signup', ['Login', 'Sign up'])
 # Obtain User Input for email and password
 email = st.sidebar.text_input('Please enter your email address')
 password = st.sidebar.text_input('Please enter your password',type = 'password')
-
-# App 
 
 # Sign up Block
 if choice == 'Sign up':
@@ -122,7 +122,7 @@ if choice == 'Login':
                 results = db.child(user['localId']).child("Posts").push(post)
                 st.balloons()
 
-            # This coloumn for the post Display
+            # This column for the post Display
             with col2:
                 
                 all_posts = db.child(user['localId']).child("Posts").get()
@@ -170,7 +170,7 @@ if choice == 'Login':
 
 # Custom imports 
 from multipage import MultiPage
-from pages import data_upload, machine_learning, metadata, data_visualize, redundant # import your pages here
+from pages import data_upload, machine_learning, metadata, data_visualize, redundant  # import your pages here
 
 # Create an instance of the app 
 app = MultiPage()
@@ -190,6 +190,13 @@ app.add_page("Change Metadata", metadata.app)
 app.add_page("Machine Learning", machine_learning.app)
 app.add_page("Data Analysis",data_visualize.app)
 app.add_page("Y-Parameter Optimization",redundant.app)
+app.add_page("Y-Parameter Optimization",redundant.app)
+
+#Subscription
+Choice = st.sidebar.selectbox('Subscription', ['Pay'])
+
+
+
 
 # The main app
 app.run()
